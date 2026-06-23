@@ -1,7 +1,8 @@
+
 ---
 title: Developer Portfolio
 emoji: 🚀
-colorFrom: cyane
+colorFrom: blue
 colorTo: purple
 sdk: docker
 pinned: false
