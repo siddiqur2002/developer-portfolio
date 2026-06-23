@@ -1,5 +1,5 @@
 # ১. বিল্ড স্টেজ
-FROM node:18-alpine AS builder
+FROM docker.io/library/node:20-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm ci
@@ -8,7 +8,7 @@ COPY . .
 RUN npm run build
 
 # ২. রানার স্টেজ
-FROM node:18-alpine AS runner
+FROM docker.io/library/node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 # Hugging Face Spaces ডিফল্টভাবে ৭৮৬০ পোর্টে রান করে
