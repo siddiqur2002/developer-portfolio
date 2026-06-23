@@ -1,3 +1,18 @@
+---
+title: Developer Portfolio
+emoji: 🚀
+colorFrom: cyane
+colorTo: purple
+sdk: docker
+pinned: false
+---
+
+# Gen AI Developer Portfolio & Dashboard
+This is a production-grade MERN + Gen AI agent application hosted on Hugging Face Spaces using Docker.
+
+
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
