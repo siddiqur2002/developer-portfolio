@@ -21,11 +21,16 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git config --global user.name "github-actions[bot]"
           
+          # ১. গিট হিস্ট্রি রিসেট করা
           rm -rf .git
           git init
-          git config --global init.defaultBranch main
+          
+          
+          git checkout -b main
+          
           git add .
           git commit -m "deploy: fresh production build without binary history"
+          
           
           git remote add hf https://siddiquRahman:$HF_TOKEN@huggingface.co/spaces/siddiquRahman/developer-portfolio
           git push --force hf main
