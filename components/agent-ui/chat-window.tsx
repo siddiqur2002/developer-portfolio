@@ -374,7 +374,7 @@ export default function ChatWindow({
                         </div>
                       </div>
                       <a
-                        href="/resume.pdf"
+                        href="https://drive.google.com/file/d/1kmaNcnpcjOcLjp4s-hcpMNUDBG_P75_d/view?usp=sharing"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="px-4 py-1.5 bg-blue-500 hover:bg-blue-600 text-zinc-950 font-bold text-xs rounded-lg shadow-md hover:shadow-blue-500/20 transition-all duration-200 flex items-center gap-1"
