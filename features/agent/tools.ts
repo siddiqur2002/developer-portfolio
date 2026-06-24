@@ -1,4 +1,3 @@
-// features/agent/tools.ts
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
 import { Octokit } from "@octokit/rest";
@@ -12,42 +11,42 @@ export const MY_PROJECTS = [
   {
     title: "Backend-Ledger-Banking",
     description:
-      "An enterprise-grade dashboard monitoring LLM latencies, token consumption, and trace analytics in real-time.",
+      "Backend design for Banking and Transaction web application",
     techStack: [
-      "Next.js 16.2",
-      "LangChain JS",
-      "Tailwind CSS v4.3",
-      "TypeScript",
+      "JavaScript",
+      "express",
+      "mongoose",
+      "nodemailer",
     ],
     liveUrl: "https://pipeline.yourdomain.com",
-    githubUrl: "https://github.com/yourusername/pipeline-monitor",
+    githubUrl: "https://github.com/siddiqur2002/Backend-Ledger-Banking.git",
     metrics: { lighthouse: 99, latency: "14ms" },
   },
   {
-    title: "Decentralized E-Commerce Engine",
+    title: "coinpulse",
     description:
-      "A highly resilient, multi-tenant storefront with automated webhooks and edge-cached inventory system.",
-    techStack: ["Next.js", "Supabase", "PostgreSQL", "Tailwind CSS"],
+      "Crypto Screener app with a built-in high frequency terminal and dashboard",
+    techStack: ["TypeScript","Next.js", "React.js", "Shadcn", "Tailwind CSS"],
     liveUrl: "https://shop.yourdomain.com",
-    githubUrl: "https://github.com/yourusername/core-shop",
+    githubUrl: "https://github.com/siddiqur2002/coinpulse.git",
     metrics: { lighthouse: 100, latency: "42ms" },
   },
   {
-    title: "Gen AI Full-Stack App & Interview Coach",
+    title: "Roll-Base-Backend-Dev-2",
     description:
-      "An interactive 플랫폼 that generates customized learning roadmaps and conducts AI-driven mock technical interviews with real-time feedback.",
-    techStack: ["React", "Node.js", "Express", "MongoDB", "Gemini API"],
+      "this is a role base backend design project where tow role user and artist is highlighted",
+    techStack: ["JavaScript", "Node.js", "Express", "MongoDB", "multer", "express-validator"],
     liveUrl: "https://interview-coach.yourdomain.com",
-    githubUrl: "https://github.com/yourusername/Gen_Ai_Full_Stack_App",
+    githubUrl: "https://github.com/siddiqur2002/Roll-Base-Backend-Dev-2.git",
     metrics: { lighthouse: 94, latency: "35ms" },
   },
   {
-    title: "Backend Ledger Banking Engine",
+    title: "MongoDBdataAssociation",
     description:
-      "A high-concurrency banking ledger system implementing strict ACID transactions and Banker's Algorithm for deadlock avoidance.",
-    techStack: ["C", "POSIX Threads", "Shell Scripting"],
+      "MongoDB Database operations",
+    techStack: ["node.js", "express", "mongoose"],
     liveUrl: "N/A (CLI Tool)",
-    githubUrl: "https://github.com/yourusername/Backend-Ledger-Banking",
+    githubUrl: "https://github.com/siddiqur2002/MongoDBdataAssociation.git",
     metrics: { executionTime: "2.4ms", safetyCheck: "Passed" },
   },
 ];
@@ -55,7 +54,7 @@ export const MY_PROJECTS = [
 export const MY_PROFILE = {
   name: "MD SIDDIQUR RAHMAN",
   role: "AI Engineer & Full-Stack Web Developer",
-  bio: "Specializing in multi-agent orchestration, streaming server actions, and extreme high-performance web systems using Next.js 16+ and Tailwind v4.",
+  bio: "I am Md Siddiqur Rahman studies in Muhammadpur Kendriya College Department of Computer Science and Engineering(CSE). A Programmer, Developer and Engineer",
   skills: {
     frontend: [
       "Next.js (App Router)",
@@ -83,14 +82,14 @@ export const MY_PROFILE = {
   socials: {
     linkedin: "https://www.linkedin.com/in/md-siddiqur-rahman-a217b13ab/",
     github: "https://github.com/siddiqur2002",
-    portfolio: "https://yourportfolio.com",
-    resumeUrl: "https://yourportfolio.com/resume.pdf",
+    portfolio: "https://siddiqurahman-developer-portfolio.hf.space/",
+    resumeUrl: "blob:https://mybdjobs.bdjobs.com/e236880a-0fa8-4eca-83d9-ccfc84046830",
   },
 };
 
 /**
  * Tool 1: Get Projects
- */
+*/
 export const getProjectsTool = tool(
   async ({ category }) => {
     if (category) {
@@ -124,7 +123,7 @@ export const getProjectsTool = tool(
 
 /**
  * Tool 2: Get Profile Info
- */
+*/
 export const getProfileInfoTool = tool(async () => JSON.stringify(MY_PROFILE), {
   name: "get_developer_profile",
   description:
@@ -134,41 +133,45 @@ export const getProfileInfoTool = tool(async () => JSON.stringify(MY_PROFILE), {
 
 /**
  * Tool 4: Get Resume / CV Link
- */
+*/
+
 export const getResumeTool = tool(
   async ({ query }) => {
-    // রেজুমের মূল তথ্য এখানে JSON হিসেবে রাখুন (এটিই এজেন্টকে "পড়তে" সাহায্য করবে)
+    
     const MY_RESUME_DATA = {
-      summary: "AI Engineer with 3+ years in MERN and GenAI...",
-      experience: "Senior Dev at X, Junior Dev at Y...",
-      skills: ["React", "Node.js", "LangChain", "C"],
-      downloadLink: "https://yourportfolio.com/resume.pdf",
+      summary: "Full Stack Developer focused on MERN Stack and Generative AI applications.",
+      experience: "Experienced in building production-ready web apps and AI-powered agents.",
+      skills: ["React", "Node.js", "Express", "MongoDB", "Next.js", "LangChain", "Fast API"],
+      downloadLink: "/resume.pdf", 
     };
 
     if (query) {
-      // যদি ইউজার নির্দিষ্ট কিছু জানতে চায় (যেমন: "আমার এক্সপেরিয়েন্স কি?")
-      return JSON.stringify({
-        answer:
-          "Based on my resume: " +
-          MY_RESUME_DATA[query as keyof typeof MY_RESUME_DATA],
-      });
+      const key = query as keyof typeof MY_RESUME_DATA;
+      if (MY_RESUME_DATA[key]) {
+        return JSON.stringify({
+          answer: `Based on my resume, here is the information about my ${query}: ${MY_RESUME_DATA[key]}`,
+          downloadLink: MY_RESUME_DATA.downloadLink 
+        });
+      }
     }
 
     return JSON.stringify({
-      message: "Here is my resume data.",
+      message: "Here is my full resume data and the official PDF document.",
       data: MY_RESUME_DATA,
+      showResumeViewer: true, 
+      downloadLink: MY_RESUME_DATA.downloadLink
     });
   },
   {
     name: "get_developer_resume",
     description:
-      "Use this to answer questions about the developer's experience, skills, or to get the resume download link.",
+      "Use this to answer questions about the developer's experience, skills, summary, or to display/download the official resume PDF file.",
     schema: z.object({
       query: z
         .string()
         .optional()
         .describe(
-          "Ask specific things like 'experience', 'skills', or 'summary'",
+          "Ask specific things like 'experience', 'skills', or 'summary' to query the text data.",
         ),
     }),
   },
@@ -181,10 +184,10 @@ export const getGitHubRepoTool = tool(
   async ({ projectName }) => {
     try {
       if (projectName) {
-        // নির্দিষ্ট রেপোজিটরির ডাটা খোঁজা
+        // finding repository details using GitHub API
         const { data: repo } = await octokit.rest.repos.get({
-          owner: "siddiqur2002", // আপনার গিটহাব ইউজারনেম
-          repo: projectName.trim(), // কোনো এক্সট্রা স্পেস থাকলে ট্রিম করে নেওয়া ভালো
+          owner: "siddiqur2002", 
+          repo: projectName.trim(), 
         });
 
         return JSON.stringify({
@@ -229,7 +232,7 @@ export const getGitHubRepoTool = tool(
 export const sendEmailTool = tool(
   async ({ senderEmail, senderName, subject, body }) => {
     try {
-      // ট্রান্সপোর্টার তৈরি
+      // Transport 
       const transporter = nodemailer.createTransport({
         service: "gmail",
         auth: {
@@ -238,7 +241,7 @@ export const sendEmailTool = tool(
         },
       });
 
-      // ইমেইল অপশনস
+      // email options
       const mailOptions = {
         from: `"${senderName}" <${senderEmail}>`,
         to: process.env.RECEIVER_EMAIL,
@@ -270,7 +273,7 @@ export const sendEmailTool = tool(
         .describe("The email of the user/recruiter sending the message."),
       senderName: z
         .string()
-        .describe("The name of the user or recruiter sending the message."), // স্কিমাতে নাম যোগ করা হলো
+        .describe("The name of the user or recruiter sending the message."), 
       subject: z
         .string()
         .describe("A suitable corporate professional subject line for the email."),

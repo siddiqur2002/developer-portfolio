@@ -124,7 +124,7 @@ export default function ChatWindow({
         triggerTextToSpeech(data.aiText);
       }
 
-      // 📊 ভয়েস এপিআই যদি টেলিমেট্রি পাঠায় তবে ড্যাশবোর্ড আপডেট হবে
+      // 📊 voice api tememetry send
       if (data.telemetry && typeof onTelemetryReceived === "function") {
         onTelemetryReceived(data.telemetry);
       }
@@ -196,7 +196,6 @@ export default function ChatWindow({
           ]);
         });
 
-        // 📊 🎯 মেইন ম্যাজিক এখানে: ব্যাকএন্ড থেকে আসা লাইভ টেলিমেট্রি ড্যাশবোর্ডে পুশ করা হচ্ছে
         if (data.telemetry && typeof onTelemetryReceived === "function") {
           onTelemetryReceived(data.telemetry);
         }
@@ -227,7 +226,7 @@ export default function ChatWindow({
   const isUiLoading = isLoading || isPending || audioLoading;
 
   return (
-    /* কাস্টম গ্লাস ব্যাকগ্রাউন্ড: bg-zinc-950/40 এবং নিখুঁত রিডিং এর জন্য backdrop-blur-xl */
+    
     <div className="w-full max-w-2xl mx-auto flex flex-col h-[500px] border border-zinc-800/80 rounded-xl bg-zinc-950/40 backdrop-blur-xl overflow-hidden shadow-2xl shadow-blue-950/20">
       {/* Terminal Header */}
       <div className="flex items-center justify-between px-4 py-3 bg-zinc-900/40 border-b border-zinc-800/60">
@@ -361,6 +360,29 @@ export default function ChatWindow({
                   >
                     {msg.content}
                   </ReactMarkdown>
+                  {msg.content?.toLowerCase().includes("resume") && (
+                    <div className="mt-3 p-3 border border-blue-500/20 bg-blue-950/10 rounded-xl flex items-center justify-between backdrop-blur-sm">
+                      <div className="flex items-center gap-3">
+                        <span className="text-xl">📄</span>
+                        <div>
+                          <p className="text-xs font-semibold text-zinc-200">
+                            Muhammad_Resume.pdf
+                          </p>
+                          <p className="text-[10px] text-zinc-400">
+                            Official PDF with Profile Image
+                          </p>
+                        </div>
+                      </div>
+                      <a
+                        href="/resume.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="px-4 py-1.5 bg-blue-500 hover:bg-blue-600 text-zinc-950 font-bold text-xs rounded-lg shadow-md hover:shadow-blue-500/20 transition-all duration-200 flex items-center gap-1"
+                      >
+                        View PDF
+                      </a>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
@@ -410,9 +432,7 @@ export default function ChatWindow({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={
-            isRecording
-              ? "Listening to your voice..."
-              : "Ask query about me..."
+            isRecording ? "Listening to your voice..." : "Ask query about me..."
           }
           disabled={isUiLoading || isRecording}
           className="flex-1 bg-zinc-950/60 text-zinc-200 text-sm rounded-full px-3.5 py-2 border border-zinc-800 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-sans"
