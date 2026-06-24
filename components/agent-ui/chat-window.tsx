@@ -412,7 +412,7 @@ export default function ChatWindow({
           placeholder={
             isRecording
               ? "Listening to your voice..."
-              : "Ask me: 'Show me his Next.js projects'..."
+              : "Ask query about me..."
           }
           disabled={isUiLoading || isRecording}
           className="flex-1 bg-zinc-950/60 text-zinc-200 text-sm rounded-full px-3.5 py-2 border border-zinc-800 focus:outline-none focus:border-blue-500 transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-sans"
