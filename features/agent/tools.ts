@@ -246,7 +246,7 @@ export const sendEmailTool = tool(
         text: `From: ${senderName} (${senderEmail})\n\nMessage:\n${body}`,
       };
 
-      // মেইল পাঠানো
+      
       await transporter.sendMail(mailOptions);
 
       return JSON.stringify({
